@@ -22,7 +22,7 @@ y = pd.read_csv(path + '/tag_train_new.csv')
 sub = pd.read_csv(path + '/sub.csv')
 print('load data ok...')
 
-#训练集和测试集特征处理
+#训练集和测试集特征处理,由于缺失值较多后期需要对缺失值做进一步处理
 def get_feature(op,trans,label):
     for feature in op.columns[2:]:
         label = label.merge(op.groupby(['UID'])[feature].count().reset_index(),on='UID',how='left')
@@ -41,6 +41,7 @@ def get_feature(op,trans,label):
             label =label.merge(trans.groupby(['UID'])[feature].mean().reset_index(),on='UID',how='left')
             label =label.merge(trans.groupby(['UID'])[feature].median().reset_index(),on='UID',how='left')
             label =label.merge(trans.groupby(['UID'])[feature].std().reset_index(),on='UID',how='left')
+            label =label.merge(trans.groupby(['UID'])[feature].skew().reset_index(),on='UID',how='left')
     return label
 
 
