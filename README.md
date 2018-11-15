@@ -5,6 +5,6 @@
 
 baseline模型：
    
-   lightgbm    线上得分：0.5142          
+   lightgbm    线上得分：0.523左右          
 
 祝大家取得优异的成绩！！！
